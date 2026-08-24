@@ -1,22 +1,19 @@
 # Approach
 
-I built the whole thing client-side: React, TypeScript and Vite, with pdf.js for parsing and
-Tesseract.js for OCR. No backend means no keys, no cost, no rate limits, and files never leave
-the user's device — which also made deployment a static build.
+Kept it entirely client-side — React, TypeScript, Vite, pdf.js for parsing, Tesseract.js for
+OCR. No backend meant no API keys, no cost, no rate limits, and files never leave the browser.
 
-The interesting problem was preserving formatting. pdf.js returns text in drawing order, not
-reading order, so concatenating it yields scrambled output. Instead I keep each item's affine
-transform and rebuild the page geometrically: group items into lines by baseline, sort
-left-to-right, insert spaces where the horizontal gap exceeds a space width, and break
-paragraphs where the vertical gap exceeds normal line spacing.
+The part that took the most thought was preserving PDF formatting. pdf.js hands back text in
+drawing order rather than reading order, so naively joining the items scrambles the output.
+Instead I use each item's transform to rebuild the page geometrically: group glyphs into lines
+by baseline, sort left to right, space by the real horizontal gaps, and break paragraphs where
+the vertical gap is bigger than normal line spacing.
 
-That gave a second win. If a page's text layer is effectively empty, it's a scan, so the page
-is rasterised and sent through OCR automatically — image-only PDFs work with no extra step.
+Nice side effect: if a page's text layer comes back basically empty, it's almost certainly a
+scan, so that page gets rasterized and OCR'd automatically — image-only PDFs just work.
 
-For analysis I chose explainable heuristics over an LLM. Seven scorers — hook, engagement,
-length, readability, discoverability, tone, formatting — each return a score and the
-suggestions justifying it, combined into a weighted total. Every result is deterministic and
-explainable in one sentence.
-
-`analyze()` is pure, so editing the text re-scores instantly. The heavy engines load on
-demand, keeping the shell at 73 kB.
+For scoring, I went with explainable rules instead of an LLM call: seven scorers (hook,
+engagement, length, readability, discoverability, tone, formatting) each produce a score and
+the suggestions behind it, combined into one weighted total. Every result is deterministic and
+explainable in a sentence — no black box, and edits re-score instantly since it's a pure
+function of the text. Parsing engines load lazily to keep the initial bundle small.
