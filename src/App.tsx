@@ -72,12 +72,11 @@ export default function App() {
     <div className="app">
       <header className="masthead">
         <div className="brand">
-          <div className="brand-mark" aria-hidden="true">SA</div>
           <div>
             <h1>Social Media Content Analyzer</h1>
             <p>
-              Upload a PDF or a screenshot of a post. It extracts the text — with OCR
-              when needed — then scores it and suggests specific ways to lift engagement.
+              Drop in a PDF or a screenshot of a post. It pulls out the text and tells you
+              what's working and what isn't before you hit publish.
             </p>
           </div>
         </div>
@@ -157,9 +156,6 @@ export default function App() {
         </div>
       </div>
 
-      <footer className="footer">
-        Runs entirely in your browser — no file ever leaves your device.
-      </footer>
     </div>
   );
 }

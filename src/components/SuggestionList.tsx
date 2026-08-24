@@ -48,7 +48,7 @@ export function SuggestionList({ suggestions }: { suggestions: Suggestion[] }) {
       ) : (
         <ul className="suggestions">
           {visible.map((item) => (
-            <li className="suggestion" key={item.id}>
+            <li className={`suggestion sev-${item.severity}`} key={item.id}>
               <span className={`suggestion-dot sev-${item.severity}`} aria-hidden="true" />
               <div>
                 <h4>
