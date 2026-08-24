@@ -4,8 +4,8 @@ Upload a PDF or a screenshot of a social post and get back an engagement score p
 suggestions for improving it. Text comes out of the PDF's own text layer when there is one,
 and falls back to OCR (Tesseract) for scans, screenshots, or images.
 
-No backend. Everything — parsing, OCR, scoring — runs in the browser, so nothing you upload
-ever leaves your machine.
+No backend. Parsing, OCR, and scoring all run in the browser, so nothing you upload ever
+leaves your machine.
 
 **Live app:** https://social-media-content-analyzer-kappa-five.vercel.app/
 
@@ -37,14 +37,14 @@ and break paragraphs wherever the vertical gap between lines is unusually large.
 keeps the extracted text looking like the source document instead of a word salad.
 
 If a PDF page turns out to have basically no text layer (i.e. it's a scanned image saved as a
-PDF), the page gets rendered to a canvas and OCR'd automatically — no separate "treat this as
+PDF), the page gets rendered to a canvas and OCR'd automatically. No separate "treat this as
 an image" step needed from the user.
 
 Once there's text, it gets scored 0–100 across seven weighted categories:
 
 | Category | Weight | Checks |
 |---|---|---|
-| Hook | 20% | Does the opening line earn attention — question, number, bold claim — and does it survive the platform's preview cutoff |
+| Hook | 20% | Does the opening line earn attention (question, number, bold claim) and survive the platform's preview cutoff |
 | Engagement | 20% | CTA present, ends on a question, concrete numbers used, link reach penalty |
 | Length fit | 15% | Character count vs. that platform's sweet spot and hard limit |
 | Readability | 15% | Flesch reading ease, sentence length, filler words, passive voice |
@@ -57,7 +57,7 @@ Facebook) since the character and hashtag targets differ per platform. There's a
 panel below the suggestions with reading time, grade level, sentiment, hashtag/mention/link
 counts, etc.
 
-The extracted text sits in an editable box, and the score recalculates as you type — it's a
+The extracted text sits in an editable box, and the score recalculates as you type. It's a
 plain synchronous function of the text, so there's nothing to debounce or wait on.
 
 ## Why heuristics instead of an LLM call
@@ -88,13 +88,13 @@ src/
   App.tsx          state + wiring
 ```
 
-pdf.js and Tesseract are both dynamically imported, only once a file actually needs them —
-the initial JS payload is under 75 kB gzipped, the parsing engines load on demand after that.
+pdf.js and Tesseract are both dynamically imported, only once a file actually needs them. The
+initial JS payload is under 75 kB gzipped, and the parsing engines load on demand after that.
 
 ## Known limitations
 
-- OCR accuracy depends entirely on the source image — low-res or low-contrast scans will
-  produce messier text, and the app flags it when confidence drops below 60%.
+- OCR accuracy depends entirely on the source image. Low-res or low-contrast scans produce
+  messier text, and the app flags it when confidence drops below 60%.
 - Scoring lexicons are English-only.
 - The platform "sweet spot" numbers are rules of thumb pulled from public engagement studies,
   not hard guarantees, and the UI is worded that way.
