@@ -7,7 +7,7 @@ and falls back to OCR (Tesseract) for scans, screenshots, or images.
 No backend. Everything — parsing, OCR, scoring — runs in the browser, so nothing you upload
 ever leaves your machine.
 
-**Live app:** _(add your deployed URL here)_
+**Live app:** https://social-media-content-analyzer-kappa-five.vercel.app/
 
 ## Running it
 
