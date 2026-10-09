@@ -1,11 +1,37 @@
 {
-  "name": "social-media-analyzer",
+  "name": "social-media-content-analyzer",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Extract text from PDFs and images in the browser and get an explainable engagement score with concrete suggestions for social media posts.",
+  "license": "MIT",
+  "author": "Prashast Awasthi <prashast.awasthi2212@gmail.com>",
+  "homepage": "https://social-media-content-analyzer-kappa-five.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awasthiprashast/social-media-content-analyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/awasthiprashast/social-media-content-analyzer/issues"
+  },
+  "keywords": [
+    "social-media",
+    "content-analyzer",
+    "ocr",
+    "pdf",
+    "tesseract",
+    "react",
+    "typescript",
+    "vite",
+    "engagement"
+  ],
   "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "typecheck": "tsc -b",
     "lint": "oxlint",
     "preview": "vite preview"
   },

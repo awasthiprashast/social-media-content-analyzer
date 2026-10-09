@@ -35,7 +35,7 @@ function verdict(score: number): { headline: string; detail: string } {
   if (score >= 40) {
     return {
       headline: 'Needs work',
-      detail: 'Start with the red items — they cost the most reach.',
+      detail: 'Start with the red items - they cost the most reach.',
     };
   }
   return {

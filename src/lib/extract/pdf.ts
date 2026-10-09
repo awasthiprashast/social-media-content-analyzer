@@ -111,7 +111,7 @@ async function ocrPage(
   onProgress?.({
     stage: 'rendering',
     progress: (pageNo - 1) / total,
-    message: `Page ${pageNo} looks scanned — rendering it for OCR…`,
+    message: `Page ${pageNo} looks scanned - rendering it for OCR…`,
   });
 
   const base = page.getViewport({ scale: 1 });

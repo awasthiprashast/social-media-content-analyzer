@@ -1,11 +1,16 @@
 # Social Media Content Analyzer
 
+[![CI](https://github.com/awasthiprashast/social-media-content-analyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/awasthiprashast/social-media-content-analyzer/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![React](https://img.shields.io/badge/React-19-61dafb) ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6) ![Vite](https://img.shields.io/badge/Vite-8-646cff)
+
 Upload a PDF or a screenshot of a social post and get back an engagement score plus concrete
 suggestions for improving it. Text comes out of the PDF's own text layer when there is one,
 and falls back to OCR (Tesseract) for scans, screenshots, or images.
 
 No backend. Parsing, OCR, and scoring all run in the browser, so nothing you upload ever
-leaves your machine.
+leaves your machine. (The one-time OCR engine and English language model are fetched from a
+public CDN on first use; your files are never uploaded.)
 
 **Live app:** https://social-media-content-analyzer-kappa-five.vercel.app/
 
@@ -21,6 +26,7 @@ Opens on http://localhost:5173. Needs Node 20.19+ (or 22.12+) for Vite 8.
 ```bash
 npm run build     # typecheck + production build to dist/
 npm run preview   # serve that build locally
+npm run typecheck
 npm run lint
 ```
 
@@ -70,6 +76,8 @@ and won't catch anything outside the patterns it knows about.
 
 ## Layout
 
+Design notes live in [docs/APPROACH.md](docs/APPROACH.md).
+
 ```
 src/
   lib/
@@ -99,3 +107,11 @@ initial JS payload is under 75 kB gzipped, and the parsing engines load on deman
 - The platform "sweet spot" numbers are rules of thumb pulled from public engagement studies,
   not hard guarantees, and the UI is worded that way.
 - Scanned PDFs get OCR'd page by page, so a long scanned document takes a few seconds per page.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE) © Prashast Awasthi
